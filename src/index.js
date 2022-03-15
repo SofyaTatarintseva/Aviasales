@@ -1,14 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import { App } from './App';
 import reportWebVitals from './reportWebVitals';
-import { store } from './app/store'
+import  getStore  from './core/store/store'
+import { aviaSalesReducer } from './core/store/ticketReducer'
 import { Provider } from 'react-redux'
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
+    <Provider store={getStore(aviaSalesReducer)}>
      <App />
     </Provider> 
   </React.StrictMode>,

@@ -1,41 +1,35 @@
-import React  from 'react';
-import { connect } from 'react-redux';
-import { changeTabs } from '../features/tickets/ticketsSlice';
+import React, { useState }  from 'react';
 import { Tab } from '../core/constants'
+import { setTabActive } from '../core/store/actions'
+import { useDispatch } from 'react-redux';
 
-class Tabs extends React.Component {
-    
-  state = {
-        cheap: 'tab_btn btn_left',
-        fast: 'tab_btn',
-        optimal: 'tab_btn btn_rigth',    
-        active: ' tab_btn__active tab_btn__active_text'
-    };
-
-  getStyle = (name) => {
-    if (this.props.activeTab === name) {
-        return this.state[name] + this.state.active
+export function Tabs (props) {
+  const dispatch = useDispatch();
+  
+  const[ style ] = useState({
+    cheap: 'tab_btn btn_left',
+    fast: 'tab_btn',
+    optimal: 'tab_btn btn_rigth',    
+    active: ' tab_btn__active tab_btn__active_text'
+  });
+  
+  function getStyle (name)  {
+    if (props.activeTab === name) {
+        return style[name] + style.active
     } else {
-        return this.state[name] + ' text_header'
+        return style[name] + ' text_header'
     }
   }
-  setTabs = (event) => {
-      this.props.changeTabs(event.target.name)
+  function setTabs (event) {
+    dispatch(setTabActive(event.target.name))
   }
-  render() {
+
     return (
         <div className="tab">
-        <button name={Tab.Cheap} onClick={this.setTabs} className={this.getStyle(Tab.Cheap)}> Самый дешевый </button>
-        <button name={Tab.Fast} onClick={this.setTabs} className={this.getStyle(Tab.Fast)}> Самый быстрый </button>
-        <button name={Tab.Optimal} onClick={this.setTabs} className={this.getStyle(Tab.Optimal)}> Оптимальный </button>
+        <button name={Tab.CHEAP} onClick={setTabs} className={getStyle(Tab.CHEAP)}> Самый дешевый </button>
+        <button name={Tab.FAST} onClick={setTabs} className={getStyle(Tab.FAST)}> Самый быстрый </button>
+        <button name={Tab.OPTIMAL} onClick={setTabs} className={getStyle(Tab.OPTIMAL)}> Оптимальный </button>
       </div>
     );
-  }
+  
 }
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        changeTabs: (name) => dispatch(changeTabs(name))
-    }
-};
-export default connect(null, mapDispatchToProps)(Tabs)

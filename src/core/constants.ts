@@ -1,8 +1,16 @@
 export enum Tab {
-    Cheap = "cheap",
-    Fast = "fast",
-    Optimal = "optimal",
+    CHEAP = "cheap",
+    FAST = "fast",
+    OPTIMAL = "optimal",
 }
 export enum Load {
-    More = 5
+    MORE = 5
+}
+
+export enum Filter {
+    ISALL = 'isAll',
+    ISZERO = '0',
+    ISONE = '1',
+    ISTWO = '2',
+    ISTHREE = '3'
 }

@@ -46,17 +46,16 @@ function CardTiket(props) {
 }
 
 
-class TiketInfo extends React.Component {
-    render() {
-        const ticketsAll = this.props.tikets.length > 0 ? this.props.tikets.map((el, index) => 
-            <CardTiket key={index} value={el}/>
-        ) :  <div>Нет данных</div>
-        return (
-            <div>
-            {ticketsAll}
-            </div>
-        
-        );
-    }
+export function TiketInfo (props){
+    const ticketsAll = props.tikets.length > 0 ? props.tikets.map((el, index) => 
+        <CardTiket key={index} value={el}/>
+    ) :  <div>Нет данных</div>
+
+    return (
+        <div>
+        {ticketsAll}
+        </div>
+    
+    );
+    
 }
-export default TiketInfo;
